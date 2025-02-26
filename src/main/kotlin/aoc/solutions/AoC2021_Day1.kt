@@ -37,14 +37,14 @@ fun threeMeasurementWindows(list : List<Int>) : Int{
 }
 
 fun main() {
-    val file = "src/main/kotlin/aoc/data/day1_input"
+    val file = "src/main/resources/aoc/day1_input"
     val list: List<Int> = (File(file).readLines().map { it.toInt() })
     // part 1
     val result1 = countTimesItIncreases(list)
-    println("Part 1 - Antal ökningar: $result1")
+    println("Part 1 : $result1")
     // part 2
     val result2 = threeMeasurementWindows(list)
-    println("Part 2 - Antal ökningar i summor: $result2")
+    println("Part 2 : $result2")
 }
 
 /*
