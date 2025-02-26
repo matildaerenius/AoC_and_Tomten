@@ -41,10 +41,10 @@ fun main() {
     val list: List<Int> = (File(file).readLines().map { it.toInt() })
     // part 1
     val result1 = countTimesItIncreases(list)
-    println("Antal ökningar: $result1")
+    println("Part 1 - Antal ökningar: $result1")
     // part 2
     val result2 = threeMeasurementWindows(list)
-    println("Antal ökningar i summor: $result2")
+    println("Part 2 - Antal ökningar i summor: $result2")
 }
 
 /*
