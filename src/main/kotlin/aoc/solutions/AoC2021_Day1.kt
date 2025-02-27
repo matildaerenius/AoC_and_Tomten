@@ -6,6 +6,7 @@ import java.io.File
  * Advent of code 2021
  * Day 1
  * Sonar sweep
+ * Innehåller både part 1 och 2
  */
 
 /*
@@ -51,26 +52,16 @@ fun main() {
 Efter att ha löst problemet hittade jag dessa lösningar:
 
 https://todd.ginsberg.com/post/advent-of-code/2021/day1/
-    // part 1
-    fun solvePart1(): Int =
-        input
-            .zipWithNext()
-            .count { it.first < it.second }
-
-    // part 2
-    fun solvePart2(): Int =
-    input
-        .windowed(3, 1) { it.sum() }
-        .zipWithNext()
-        .count { it.first < it.second }
+    Denna använder sig av zipWithNext()
 
 https://www.reddit.com/r/adventofcode/comments/r66vow/2021_day_1_solutions/?rdt=38768
-    // part 1
-    solve { input ->
-    input.lines().map { it.toInt() }.windowed(2).count { it.last() > it.first() }
-}
-    // part 2
-    solve { input ->
-    input.lines().map { it.toInt() }.windowed(4).count { it.last() > it.first() }
-}
+    I princip alla kotlin lösningar här använder sig av windowed() och/-eller
+    zipWithNext()
+
+Andra approacher enligt ChatGPT:
+    Om vi vill använda en ackumuleringsmetod, kan vi använda reduceIndexed()
+    Iterativ lösning med ListIterator
+
+    finns mängder med olika sätt, men personligen gillade jag användandet av
+    windowed() av de jag sett, om vi ser till kotlin
  */
