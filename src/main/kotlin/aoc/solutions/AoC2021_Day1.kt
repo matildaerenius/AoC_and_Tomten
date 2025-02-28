@@ -62,6 +62,6 @@ Andra approacher enligt ChatGPT:
     Om vi vill använda en ackumuleringsmetod, kan vi använda reduceIndexed()
     Iterativ lösning med ListIterator
 
-    finns mängder med olika sätt, men personligen gillade jag användandet av
+    Finns mängder med olika sätt, men personligen gillade jag användandet av
     windowed() av de jag sett, om vi ser till kotlin
  */

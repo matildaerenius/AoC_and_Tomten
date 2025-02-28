@@ -18,10 +18,16 @@ class Tomteland {
     )
 
     // TODO : Gör rekursiv funktion för att hämta alla underordnade på samtliga nivåer
-
+    fun getUnderlings(currentName: String, res: MutableList<String>): List<String> {
+        hierarchy[currentName]?.forEach { subordinate ->
+            res.add(subordinate)
+            getUnderlings(subordinate, res)
+        }
+        return res
+    }
+}
 
     // TODO : Main metod + inmatning
     fun main() {
         val tomteland = Tomteland()
     }
-}

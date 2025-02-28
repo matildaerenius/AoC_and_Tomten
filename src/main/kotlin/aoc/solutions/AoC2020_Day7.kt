@@ -13,7 +13,8 @@ import java.util.*
 // Part 1
 
 /*
-Första approachen, minimal/ingen internet hjälp.
+--Första approachen--
+minimal/ingen internet hjälp.
 Använde en while-loop som söker efter väskor som kan innehålla "shiny gold",
 kontrollerar innehållet med any, och vid match lägger till väskan i bags
  */
@@ -44,7 +45,8 @@ fun solutionWhileLoop() {
 }
 
 /*
-Andra approachen, efter titt på kotlin lösningar på nedan hemsidor, samt chatGPT rekommendation
+--Andra approachen--
+Efter titt på kotlin lösningar på nedan hemsidor, samt chatGPT rekommendation
 https://todd.ginsberg.com/post/advent-of-code/2020/day7/
 https://www.reddit.com/r/adventofcode/comments/k8a31f/2020_day_07_solutions/
 använder sig majoriteten av en graf(map) för att kunna söka på väskor och sedan rekursiv funktion med DFS
@@ -83,9 +85,11 @@ return visited.size
 }
 
 /*
-Tredje approachen, efter att ha läst på om vanliga datastrukturer och algoritmer,
+--Tredje approachen--
+Efter att ha läst på om vanliga datastrukturer och algoritmer,
 bör man även kunna lösa denna med queue och BFS, jag hittade inga kotlin
 lösningar på detta sätt, lär ju definitivt finnas men men
+nedan är mitt försök på en sådan lösning
  */
 fun solutionBFS(): Int {
     val input = File("src/main/resources/aoc/day7_input").readLines()
@@ -124,8 +128,9 @@ fun solutionBFS(): Int {
 }
 
 /*/
-Fjärde approachen, efter genomgång av diverse github repon,
-fann jag en lösning gjord på "ren" funktionell programmering
+--Fjärde approachen--
+Efter genomgång av diverse github repon, fann jag en lösning gjord på "ren" funktionell programmering
+nedan är basically min tillsammans med chatGPT minnes variation på hur koden såg ut, hittar ej repot :(
  */
 fun solutionfunc(): Int {
     val file = File("src/main/resources/aoc/day7_input").readLines()
@@ -160,3 +165,8 @@ fun main() {
     println("\n===== Lösning 4: Ren funktionell programmering =====")
     println(solutionfunc())
 }
+
+/*
+Jämförelse av de olika lösningarna:
+
+ */

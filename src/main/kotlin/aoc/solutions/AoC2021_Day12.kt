@@ -12,7 +12,7 @@ import java.io.File
 // Part 1
 
 /*
-Löste denna med hjälp av hur jag såg/lärt mig strukturen på 2020 day 7
+Löste denna främst med hjälp av hur jag såg/lärt mig strukturen på 2020 day 7
  */
 
 // TODO : Bygg en graf, med map?
