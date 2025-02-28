@@ -30,4 +30,29 @@ class Tomteland {
     // TODO : Main metod + inmatning
     fun main() {
         val tomteland = Tomteland()
-    }
+
+            while (true) {
+                println("\nAnge en tomte att söka på ('exit' för att avsluta):")
+                val input = readLine()?.trim()
+
+                if (input.equals("exit", ignoreCase = true)) {
+                    println("Avslutar programmet...")
+                    break
+                }
+
+                if (input.isNullOrBlank()) {
+                    println("Felaktig inmatning, försök igen.")
+                    continue
+                }
+
+                val underlings = tomteland.getUnderlings(input, mutableListOf())
+
+                if (underlings.isEmpty()) {
+                    println("$input har inga underordnade eller finns inte i hierarkin.")
+                } else {
+                    println("Underordnade till $input: ${underlings.joinToString(", ")}")
+                }
+            }
+        }
+
+
