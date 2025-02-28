@@ -49,7 +49,7 @@ fun solutionWhileLoop() {
 Efter titt på kotlin lösningar på nedan hemsidor, samt chatGPT rekommendation
 https://todd.ginsberg.com/post/advent-of-code/2020/day7/
 https://www.reddit.com/r/adventofcode/comments/k8a31f/2020_day_07_solutions/
-använder sig majoriteten av en graf(map) för att kunna söka på väskor och sedan rekursiv funktion med DFS
+använder sig majoriteten av datastrukturen graf(map) för att kunna söka på väskor och sedan algoritm rekursiv DFS
  */
 fun solutionDFS(): Int {
     val input = File("src/main/resources/aoc/day7_input").readLines()
@@ -87,7 +87,7 @@ return visited.size
 /*
 --Tredje approachen--
 Efter att ha läst på om vanliga datastrukturer och algoritmer,
-bör man även kunna lösa denna med queue och BFS, jag hittade inga kotlin
+bör man även kunna lösa denna med graf(map), queue och BFS, jag hittade inga kotlin
 lösningar på detta sätt, lär ju definitivt finnas men men
 nedan är mitt försök på en sådan lösning
  */
@@ -130,6 +130,7 @@ fun solutionBFS(): Int {
 /*/
 --Fjärde approachen--
 Efter genomgång av diverse github repon, fann jag en lösning gjord på "ren" funktionell programmering
+dvs en immutable graf(map) + rekursiv + fold
 nedan är basically min tillsammans med chatGPT minnes variation på hur koden såg ut, hittar ej repot :(
  */
 fun solutionfunc(): Int {
@@ -167,6 +168,21 @@ fun main() {
 }
 
 /*
-Jämförelse av de olika lösningarna:
+--Jämförelse av de olika lösningarna--
 
+Lösning 1 :
+pros- Enligt mig lättast att förstå, använder ingen rekursiv vilket undgår stack overflow
+cons- ineffektivt då den går igenom listan flera gånger, mutable
+
+Lösning 2 :
+pros - effektiv, renare kod
+cons - rekursiv, mutable
+
+Lösning 3 :
+pros - minnes effektivt till skillnad mot dfs, undgår djup rekursiv
+cons - mutable
+
+Lösning 4 :
+pros - helt immutable, inga mutable
+cons - rekursiv, enligt mig svårast att läsa
  */
