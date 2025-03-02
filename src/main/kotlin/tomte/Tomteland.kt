@@ -6,7 +6,6 @@ package tomte
 
 class Tomteland {
 
-    // TODO : Gör datastruktur, en map
     private val hierarchy: Map<String, List<String>> = mapOf(
         "Tomten" to listOf("Glader", "Butter"),
         "Glader" to listOf("Tröger", "Trötter", "Blyger"),
@@ -17,7 +16,6 @@ class Tomteland {
         "Myran" to listOf("Bladlusen")
     )
 
-    // TODO : Gör rekursiv funktion för att hämta alla underordnade på samtliga nivåer
     fun getUnderlings(currentName: String, res: MutableList<String>): List<String> {
         hierarchy[currentName]?.forEach { subordinate ->
             res.add(subordinate)
@@ -27,7 +25,6 @@ class Tomteland {
     }
 }
 
-    // TODO : Main metod + inmatning
     fun main() {
         val tomteland = Tomteland()
 

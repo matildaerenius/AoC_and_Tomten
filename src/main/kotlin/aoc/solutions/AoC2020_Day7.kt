@@ -31,14 +31,14 @@ fun solutionWhileLoop() {
 
         for (line in file) {
             val (bag, contents) = line.split(" contain ").map { it.replace("bags", "").trim() }
-            if (bags.any { contents.contains(it) }) {
+            if (bags.any { contents.contains(it) }) { // Finns det någon väska i bags som finns i contents?
                 bags.add(bag)
                 toRemove.add(line)
                 foundNewBag = true
             }
         }
 
-        file.removeAll(toRemove) // Tar bort alla funna rader på en gång
+        file.removeAll(toRemove) // Tar bort alla hittade rader på en gång
     }
 
     println(bags.size - 1)
@@ -54,7 +54,7 @@ för sökning
  */
 fun solutionDFS(): Int {
     val input = File("src/main/resources/aoc/day7_input").readLines()
-    val containsMap = mutableMapOf<String, MutableList<String>>()
+    val containsMap = mutableMapOf<String, MutableList<String>>() // Väskfärg || lista över väskor som kan innehålla den färg
 
     for (line in input) {
         val parts = line.split(" bags contain ")
@@ -62,7 +62,7 @@ fun solutionDFS(): Int {
         val innerBags = parts[1].split(", ")
 
     for (innerBag in innerBags) {
-        val match = Regex("(\\d+) (.+?) bag").find(innerBag)
+        val match = Regex("(\\d+) (.+?) bag").find(innerBag) // Tar ut antal och färgnamn
         if (match != null) {
             val (_, innerBagColor) = match.destructured
             containsMap.computeIfAbsent(innerBagColor) { mutableListOf() }.add(outerBag)
@@ -70,7 +70,7 @@ fun solutionDFS(): Int {
     }
 }
 
-val visited = mutableSetOf<String>()
+val visited = mutableSetOf<String>() // Håller reda på väskor vi kollat
 
 fun dfs(bag: String) {
     containsMap[bag]?.forEach { outerBag ->
@@ -80,7 +80,7 @@ fun dfs(bag: String) {
     }
 }
 
-dfs("shiny gold")
+dfs("shiny gold") // Startar från "shiny gold"
 
 return visited.size
 }
@@ -89,8 +89,7 @@ return visited.size
 --Tredje approachen--
 Efter att ha läst på om vanliga datastrukturer och algoritmer,
 bör man även kunna lösa denna med graf(map), queue och BFS, jag hittade inga kotlin
-lösningar på detta sätt, lär ju definitivt finnas men men
-nedan är mitt försök på en sådan lösning
+lösningar på detta sätt, lär ju definitivt finnas men men nedan är mitt försök på en sådan lösning
  */
 fun solutionBFS(): Int {
     val input = File("src/main/resources/aoc/day7_input").readLines()
@@ -112,12 +111,12 @@ fun solutionBFS(): Int {
     }
 
     val queue: Queue<String> = LinkedList()
-    val visited = mutableSetOf<String>()
+    val visited = mutableSetOf<String>() // Håller reda på vilka väskor vi redan har besökt för att undvika dubbletter
 
-    queue.add("shiny gold")
+    queue.add("shiny gold") // Startar bfs från "shiny gold"
 
     while (queue.isNotEmpty()) {
-        val currentBag = queue.poll()
+        val currentBag = queue.poll() // Hämtar och tar bort första i queue, dvs fifo
         containsMap[currentBag]?.forEach { outerBag ->
             if (visited.add(outerBag)) {
                 queue.add(outerBag)

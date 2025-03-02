@@ -12,31 +12,28 @@ import java.io.File
 // Part 1
 
 /*
-Löste denna främst med hjälp av hur jag såg/lärt mig strukturen på 2020 day 7
+Löste denna främst med hjälp av hur jag såg/lärt mig strukturen på 2020 day 7, men även reddit användes :)
  */
 
-// TODO : Bygg en graf, med map?
 fun buildGraph(input: List<String>): Map<String, List<String>> {
     return input
         .map { it.split("-") }
         .flatMap { (a, b) -> listOf(a to b, b to a) } // Skapar kopplingar i båda riktningarna
-        .groupBy({ it.first }, { it.second }) // Omvandlar till en Map där nyckeln är grottan och värdet är dess grannar
+        .groupBy({ it.first }, { it.second }) // Omvandlar till Map, där nyckeln = grottan och värdet = grannar
 }
 
-// TODO : funktion för att räkna vägar, rekursiv eller loop????
 fun countPaths(graph: Map<String, List<String>>): Int {
-    return smallCaveAllowed(graph, "start", mutableSetOf()) // Startar sökning från start
+    return smallCaveAllowed(graph, "start", mutableSetOf()) // Startar sökningen från start
 }
 
-// TODO : funktion för att få se om en liten grotta får besökas eller ej, HOF, DSF???
 fun smallCaveAllowed(graph: Map<String, List<String>>, current: String, visited: MutableSet<String>) : Int {
     if (current == "end") return 1 // Om vi når "end", returnera 1 för att indikera en giltig väg
 
-    if (current.all { it.isLowerCase() }) visited.add(current) // Markera små grottor som besökta
+    if (current.all { it.isLowerCase() }) visited.add(current) // Markerar små grottor som besökta
 
     val pathCount = graph[current]!!
-        .filter { it !in visited || it.all { ch -> ch.isUpperCase() } } // Filtrera så att vi inte besöker små grottor mer än en gång
-        .sumOf { smallCaveAllowed(graph, it, HashSet(visited)) } // Anropa rekursivt och summera antalet funna vägar
+        .filter { it !in visited || it.all { ch -> ch.isUpperCase() } } // Filtrerar så att vi inte besöker små grottor mer än en gång
+        .sumOf { smallCaveAllowed(graph, it, HashSet(visited)) } // Anropa rekursivt och summera antalet hittade vägar
 
     return pathCount
 }
