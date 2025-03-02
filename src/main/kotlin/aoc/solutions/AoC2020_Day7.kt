@@ -50,6 +50,7 @@ Efter titt på kotlin lösningar på nedan hemsidor, samt chatGPT rekommendation
 https://todd.ginsberg.com/post/advent-of-code/2020/day7/
 https://www.reddit.com/r/adventofcode/comments/k8a31f/2020_day_07_solutions/
 använder sig majoriteten av datastrukturen graf(map) för att kunna söka på väskor och sedan algoritm rekursiv DFS
+för sökning
  */
 fun solutionDFS(): Int {
     val input = File("src/main/resources/aoc/day7_input").readLines()
@@ -131,7 +132,7 @@ fun solutionBFS(): Int {
 --Fjärde approachen--
 Efter genomgång av diverse github repon, fann jag en lösning gjord på "ren" funktionell programmering
 dvs en immutable graf(map) + rekursiv + fold
-nedan är basically min tillsammans med chatGPT minnes variation på hur koden såg ut, hittar ej repot :(
+nedan är basically min tillsammans med chatGPT minnes variation på ish hur koden såg ut, hittar ej repot :(
  */
 fun solutionfunc(): Int {
     val file = File("src/main/resources/aoc/day7_input").readLines()
