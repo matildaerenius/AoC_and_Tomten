@@ -139,7 +139,7 @@ fun solutionfunc(): Int {
             .flatMap { line -> // Kör igenom varje kodrad och drar ut vilka väskor som kan innehålla andra väskor
                 val (outerBag, innerBags) = line.split(" bags contain ")
                 innerBags.split(", ").mapNotNull { innerBag ->
-                    Regex("(\\d+) (.+?) bag").find(innerBag)?.groupValues?.let { it[2] to outerBag }
+                    Regex("(\\d+) (.+?) bag").find(innerBag)?.groupValues?.let { it[2] to outerBag } // Lista av par, inreväskan/yttreväskan
                 }
             }
             .groupBy({ it.first }, { it.second }) // Grupperar i en map, väskfärg och listan av väskor som kan innehålla färgen
@@ -147,7 +147,7 @@ fun solutionfunc(): Int {
         // Rekursiv funk (liknar DFS), hittar alla väskor som kan innehålla en "shiny bag"
         fun findOuterBags(bag: String, visited: Set<String> = emptySet()): Set<String> =
             containsMap[bag]?.filterNot { it in visited } // Hämtar väskor som kan innehålla bag
-                ?.fold(visited) { acc, outerBag -> acc + findOuterBags(outerBag, acc + outerBag) }
+                ?.fold(visited) { acc, outerBag -> acc + findOuterBags(outerBag, acc + outerBag) } // Bygger ny set av besökta väskor -> lägger till rekursivt
                 ?: visited
 
         return findOuterBags("shiny gold").size
