@@ -27,7 +27,7 @@ fun countPaths(graph: Map<String, List<String>>): Int {
 }
 
 fun smallCaveAllowed(graph: Map<String, List<String>>, current: String, visited: MutableSet<String>) : Int {
-    if (current == "end") return 1 // Om vi når "end", returnera 1 för att indikera en giltig väg
+    if (current == "end") return 1 // Nås "end", returnera 1 för att indikera en giltig väg
 
     if (current.all { it.isLowerCase() }) visited.add(current) // Markerar små grottor som besökta
 

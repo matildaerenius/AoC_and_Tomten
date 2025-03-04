@@ -30,9 +30,9 @@ fun solutionWhileLoop() {
         val toRemove = mutableListOf<String>()
 
         for (line in file) {
-            val (bag, contents) = line.split(" contain ").map { it.replace("bags", "").trim() }
+            val (outerBag, contents) = line.split(" contain ").map { it.replace("bags", "").trim() }
             if (bags.any { contents.contains(it) }) { // Finns det någon väska i bags som finns i contents?
-                bags.add(bag)
+                bags.add(outerBag)
                 toRemove.add(line)
                 foundNewBag = true
             }
@@ -65,7 +65,7 @@ fun solutionDFS(): Int {
         val match = Regex("(\\d+) (.+?) bag").find(innerBag) // Tar ut antal och färgnamn
         if (match != null) {
             val (_, innerBagColor) = match.destructured
-            containsMap.computeIfAbsent(innerBagColor) { mutableListOf() }.add(outerBag)
+            containsMap.computeIfAbsent(innerBagColor) { mutableListOf() }.add(outerBag) // Lägger till outerbag som kan innehålla en innerbagcolor
         }
     }
 }
@@ -73,7 +73,7 @@ fun solutionDFS(): Int {
 val visited = mutableSetOf<String>() // Håller reda på väskor vi kollat
 
 fun dfs(bag: String) {
-    containsMap[bag]?.forEach { outerBag ->
+    containsMap[bag]?.forEach { outerBag -> // Hämtar alla väskor som kan innehålla bag
         if (visited.add(outerBag)) {
             dfs(outerBag)
         }
@@ -130,22 +130,23 @@ fun solutionBFS(): Int {
 /*/
 --Fjärde approachen--
 Efter genomgång av diverse github repon, fann jag en lösning gjord på "ren" funktionell programmering
-dvs en immutable graf(map) + rekursiv + fold
+dvs en immutable graf(map) + rekursiv + fold + HOF
 nedan är basically min tillsammans med chatGPT minnes variation på ish hur koden såg ut, hittar ej repot :(
  */
 fun solutionfunc(): Int {
     val file = File("src/main/resources/aoc/day7_input").readLines()
         val containsMap = file
-            .flatMap { line ->
+            .flatMap { line -> // Kör igenom varje kodrad och drar ut vilka väskor som kan innehålla andra väskor
                 val (outerBag, innerBags) = line.split(" bags contain ")
                 innerBags.split(", ").mapNotNull { innerBag ->
                     Regex("(\\d+) (.+?) bag").find(innerBag)?.groupValues?.let { it[2] to outerBag }
                 }
             }
-            .groupBy({ it.first }, { it.second })
+            .groupBy({ it.first }, { it.second }) // Grupperar i en map, väskfärg och listan av väskor som kan innehålla färgen
 
+        // Rekursiv funk (liknar DFS), hittar alla väskor som kan innehålla en "shiny bag"
         fun findOuterBags(bag: String, visited: Set<String> = emptySet()): Set<String> =
-            containsMap[bag]?.filterNot { it in visited }
+            containsMap[bag]?.filterNot { it in visited } // Hämtar väskor som kan innehålla bag
                 ?.fold(visited) { acc, outerBag -> acc + findOuterBags(outerBag, acc + outerBag) }
                 ?: visited
 
