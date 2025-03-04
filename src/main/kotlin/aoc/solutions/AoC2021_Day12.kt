@@ -39,7 +39,7 @@ fun smallCaveAllowed(graph: Map<String, List<String>>, current: String, visited:
 }
 
 fun main() {
-    val file = File("src/main/resources/aoc/day12_input").readLines()
+    val file = File("src/main/resources/aoc/2021_day12_input").readLines()
     val graph = buildGraph(file)
     val totalPaths = countPaths(graph)
     println("Antal unika vägar: $totalPaths")

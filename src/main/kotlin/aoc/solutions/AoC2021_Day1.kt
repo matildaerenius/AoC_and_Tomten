@@ -38,7 +38,7 @@ fun threeMeasurementWindows(list : List<Int>) : Int{
 }
 
 fun main() {
-    val file = "src/main/resources/aoc/day1_input"
+    val file = "src/main/resources/aoc/2021_day1_input"
     val list: List<Int> = (File(file).readLines().map { it.toInt() })
     // part 1
     val result1 = countTimesItIncreases(list)
@@ -64,4 +64,6 @@ Andra approacher enligt ChatGPT:
 
     Finns mängder med olika sätt, men personligen gillade jag användandet av
     windowed() av de jag sett, om vi ser till kotlin
+
+    Efter jag kollat på vanliga datastrukturer och algoritmer hade jag nu löst denna med
  */

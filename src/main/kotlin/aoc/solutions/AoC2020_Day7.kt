@@ -19,7 +19,7 @@ Använde en while-loop som söker efter väskor som kan innehålla "shiny gold",
 kontrollerar innehållet med any, och vid match lägger till väskan i bags
  */
 fun solutionWhileLoop() {
-    val file = File("src/main/resources/aoc/day7_input").readLines().toMutableList()
+    val file = File("src/main/resources/aoc/2020_day7_input").readLines().toMutableList()
     val bags = mutableListOf("shiny gold")
 
     var foundNewBag = true
@@ -50,10 +50,10 @@ Efter titt på kotlin lösningar på nedan hemsidor, samt chatGPT rekommendation
 https://todd.ginsberg.com/post/advent-of-code/2020/day7/
 https://www.reddit.com/r/adventofcode/comments/k8a31f/2020_day_07_solutions/
 använder sig majoriteten av datastrukturen graf(map) för att kunna söka på väskor och sedan algoritm rekursiv DFS
-för sökning
+för sökning. Insåg nu i efter hand att istället för rekursiv dfs kan vi använda en stack, ungår stack overflow
  */
 fun solutionDFS(): Int {
-    val input = File("src/main/resources/aoc/day7_input").readLines()
+    val input = File("src/main/resources/aoc/2020_day7_input").readLines()
     val containsMap = mutableMapOf<String, MutableList<String>>() // Väskfärg || lista över väskor som kan innehålla den färg
 
     for (line in input) {
@@ -92,7 +92,7 @@ bör man även kunna lösa denna med graf(map), queue och BFS, jag hittade inga 
 lösningar på detta sätt, lär ju definitivt finnas men men nedan är mitt försök på en sådan lösning
  */
 fun solutionBFS(): Int {
-    val input = File("src/main/resources/aoc/day7_input").readLines()
+    val input = File("src/main/resources/aoc/2020_day7_input").readLines()
 
     val containsMap = mutableMapOf<String, MutableList<String>>()
 
@@ -134,7 +134,7 @@ dvs en immutable graf(map) + rekursiv + fold + HOF
 nedan är basically min tillsammans med chatGPT minnes variation på ish hur koden såg ut, hittar ej repot :(
  */
 fun solutionfunc(): Int {
-    val file = File("src/main/resources/aoc/day7_input").readLines()
+    val file = File("src/main/resources/aoc/2020_day7_input").readLines()
         val containsMap = file
             .flatMap { line -> // Kör igenom varje kodrad och drar ut vilka väskor som kan innehålla andra väskor
                 val (outerBag, innerBags) = line.split(" bags contain ")
