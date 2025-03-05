@@ -65,7 +65,8 @@ fun solutionDFS(): Int {
         val match = Regex("(\\d+) (.+?) bag").find(innerBag) // Tar ut antal och färgnamn
         if (match != null) {
             val (_, innerBagColor) = match.destructured
-            containsMap.computeIfAbsent(innerBagColor) { mutableListOf() }.add(outerBag) // Lägger till outerbag som kan innehålla en innerbagcolor
+            containsMap.computeIfAbsent(innerBagColor) { mutableListOf() }
+                .add(outerBag) // Lägger till outerbag som kan innehålla en innerbagcolor
         }
     }
 }
@@ -172,18 +173,25 @@ fun main() {
 --Jämförelse av de olika lösningarna--
 
 Lösning 1 :
-pros- Enligt mig lättast att förstå, använder ingen rekursiv vilket undgår stack overflow
-cons- ineffektivt då den går igenom listan flera gånger, mutable
+pros- Enligt mig lättast att förstå, använder ingen rekursiv vilket undgår stack overflow,
+fungerar direkt på listan behövs inte göras en graf
+cons- ineffektivt då den går igenom listan flera gånger (O(n^2)), mutable + muterar listan
 
 Lösning 2 :
-pros - effektiv, renare kod
-cons - rekursiv, mutable
+pros - effektivare än lösning 1 (O(V+E)), går bara igenom listan en gång, renare kod
+cons - rekursiv = risk för stack overflow, mutableMap och MutableSet
 
 Lösning 3 :
-pros - minnes effektivt till skillnad mot dfs, undgår djup rekursiv
-cons - mutable
+pros - minnes vänlig till skillnad mot dfs, undgår djup rekursiv, (O(V+E))
+cons - mer minne krävs än lösning 2, lagrar många väskor i queue samtidigt, mutable
 
 Lösning 4 :
-pros - helt immutable, inga mutable
-cons - rekursiv, enligt mig svårast att läsa
+pros - renaste och kortaste koden av alla lösningar, helt immutable, inga mutable, (O(V+E))
+cons - rekursiv, enligt mig svårast att läsa, lite långsammare då den skapar upp många nya set
+också lite högre minneskrävande än lösning 1 och 2
+
+Summan av kardemumman - Föredrar lösning 1 då den är lättast, men om vi ser till optimering så hade jag nog
+gått med lösning 2 (dfs) fast gjort den med en stack istället för rekursion eller lösning 3 (bfs).
+Den mest kotlin "vänliga" hade varit lösning 4, då den är kortast och renast men som sagt kan rekursionen vara
+problematisk med större datamängd
  */
