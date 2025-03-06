@@ -64,7 +64,7 @@ fun solutionDFS(): Int {
     for (innerBag in innerBags) {
         val match = Regex("(\\d+) (.+?) bag").find(innerBag) // Tar ut antal och färgnamn
         if (match != null) {
-            val (_, innerBagColor) = match.destructured
+            val (_, innerBagColor) = match.destructured // Ger en lista av regex fånget
             containsMap.computeIfAbsent(innerBagColor) { mutableListOf() }
                 .add(outerBag) // Lägger till outerbag som kan innehålla en innerbagcolor
         }
@@ -74,7 +74,7 @@ fun solutionDFS(): Int {
 val visited = mutableSetOf<String>() // Håller reda på väskor vi kollat
 
 fun dfs(bag: String) {
-    containsMap[bag]?.forEach { outerBag -> // Hämtar alla väskor som kan innehålla bag
+    containsMap[bag]?.forEach { outerBag -> // Hämtar alla väskor som kan innehålla bag och itererar över dom
         if (visited.add(outerBag)) {
             dfs(outerBag)
         }
@@ -139,7 +139,7 @@ fun solutionfunc(): Int {
         val containsMap = file
             .flatMap { line -> // Kör igenom varje kodrad och drar ut vilka väskor som kan innehålla andra väskor
                 val (outerBag, innerBags) = line.split(" bags contain ")
-                innerBags.split(", ").mapNotNull { innerBag ->
+                innerBags.split(", ").mapNotNull { innerBag -> // Loopar över innerBag i listan
                     Regex("(\\d+) (.+?) bag").find(innerBag)?.groupValues?.let { it[2] to outerBag } // Lista av par, inreväskan/yttreväskan
                 }
             }

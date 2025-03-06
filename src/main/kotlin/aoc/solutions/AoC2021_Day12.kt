@@ -33,7 +33,7 @@ fun smallCaveAllowed(graph: Map<String, List<String>>, current: String, visited:
 
     val pathCount = graph[current]!!
         .filter { it !in visited || it.all { ch -> ch.isUpperCase() } } // Filtrerar så att vi inte besöker små grottor mer än en gång
-        .sumOf { smallCaveAllowed(graph, it, HashSet(visited)) } // Anropa rekursivt och summera antalet hittade vägar
+        .sumOf { smallCaveAllowed(graph, it, HashSet(visited)) } // Anropa rekursivt och summerar antalet hittade vägar
 
     return pathCount
 }
